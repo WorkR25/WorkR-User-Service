@@ -1,0 +1,47 @@
+import fastifyCookie from '@fastify/cookie';
+// import rateLimit from '@fastify/rate-limit';
+import cors from '@fastify/cors';
+import fastifyMultipart from '@fastify/multipart';
+import Fastify from 'fastify';
+
+import app from './app';
+import db from './configs/dbConfig';
+import logger from './configs/loggerConfig';
+import serverConfig from './configs/serverConfig';
+import errorHandler from './utils/error/errorHandler';
+
+const { PORT } = serverConfig;
+
+const fastify = Fastify();
+
+// fastify.register(rateLimit, {
+//     max: 3,
+//     timeWindow: '2 minutes',
+// });
+
+fastify.register(cors, {
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    credentials: true
+});
+
+fastify.register(fastifyCookie);
+
+fastify.register(fastifyMultipart, {
+    limits: {
+        fileSize: 3 * 1024 * 1024
+    }
+});
+
+fastify.register(app);
+
+fastify.setErrorHandler(errorHandler);
+
+fastify.listen({ port: PORT }, async (err) => {
+    if(err) {
+        fastify.log.error(err);
+        process.exit(1);
+    }
+    await db.connect();
+    logger.info(`Server started at PORT: ${PORT}`);
+});
