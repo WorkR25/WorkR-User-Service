@@ -22,7 +22,7 @@ async function hashPassword(plainPassword: string) {
 
 function createToken(input: JwtTokenInput) {
     try {
-        return jwt.sign(input, JWT_SECRET, { expiresIn: JWT_EXPIRY });
+        return jwt.sign(input, JWT_SECRET, { expiresIn: String(JWT_EXPIRY) });
     } catch (error) {
         throw error;
     }
