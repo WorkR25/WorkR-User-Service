@@ -12,8 +12,8 @@ export default {
     SALT_ROUNDS: Number(process.env.SALT_ROUNDS),
     JWT_SECRET: String(process.env.JWT_SECRET),
     JWT_EXPIRY: String(process.env.JWT_EXPIRY),
-    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-    AWS_REGION: process.env.AWS_REGION,
-    AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME
+    AWS_ACCESS_KEY_ID: String(process.env.AWS_ACCESS_KEY_ID),
+    AWS_SECRET_ACCESS_KEY: String(process.env.AWS_SECRET_ACCESS_KEY),
+    AWS_REGION: String(process.env.AWS_REGION),
+    AWS_S3_BUCKET_NAME: String(process.env.AWS_S3_BUCKET_NAME)
 };
