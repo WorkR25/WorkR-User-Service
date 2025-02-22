@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 
 import serverConfig from '../../configs/serverConfig';
 import { JwtTokenInput } from '../../types/JwtTokenInput';
 import { UserTokenPayload } from '../../types/UserTokenPayload';
 
-const { JWT_EXPIRY, JWT_SECRET, SALT_ROUNDS } = serverConfig;
+const { JWT_SECRET, SALT_ROUNDS } = serverConfig;
 
 async function checkPassword(plainPassword: string, encryptedPassword: string) {
     try {
@@ -22,7 +22,7 @@ async function hashPassword(plainPassword: string) {
 
 function createToken(input: JwtTokenInput) {
     try {
-        return jwt.sign(input, JWT_SECRET, { expiresIn: JWT_EXPIRY as string });
+        return jwt.sign(input, JWT_SECRET as Secret, { expiresIn: '1d' });
     } catch (error) {
         throw error;
     }
