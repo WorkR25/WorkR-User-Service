@@ -37,7 +37,7 @@ fastify.register(app);
 
 fastify.setErrorHandler(errorHandler);
 
-fastify.listen({ port: PORT }, async (err) => {
+fastify.listen({ port: PORT, host: '0.0.0.0' }, async (err) => {
     if(err) {
         fastify.log.error(err);
         process.exit(1);
