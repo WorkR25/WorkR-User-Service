@@ -24,7 +24,7 @@ function errorHandler(err: Error, _req: FastifyRequest, res: FastifyReply) {
     }
     
     ErrorResponse.error = err;
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(ErrorResponse);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: err });
 }
 
 export default errorHandler;
