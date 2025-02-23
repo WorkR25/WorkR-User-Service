@@ -22,6 +22,7 @@ const fastify = Fastify();
 fastify.register(cors, {
     origin: ['https://www.workr.club'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'x-access-token'],
     credentials: true
 });
 
