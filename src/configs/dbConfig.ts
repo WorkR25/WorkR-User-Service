@@ -1,4 +1,5 @@
 import dataSource from '../dataSource';
+import BadRequestError from '../errors/BadRequestError';
 import logger from './loggerConfig';
 
 class DBConnection {
@@ -27,9 +28,16 @@ class DBConnection {
             throw new Error('DB is already connected');
         }
         else {
-            await dataSource.initialize();
-            logger.info('DB Successfully Connected');
-            this.isConnected = true;
+            try {
+                // Try to initialize the connection
+                await dataSource.initialize();
+                logger.info('DB Successfully Connected');
+                this.isConnected = true;
+            } catch (error) {
+                // Log detailed error
+                logger.error(`DB connection failed: ${error}`);
+                throw new BadRequestError('Database connection error', { error });
+            }
         }
     }
 }
