@@ -68,7 +68,7 @@ export const createAdminRoleZodSchema = z.object({
 });
 
 export const updateUserIdZodSchema = z.object({
-    id: z.number()
+    id: z.string()
 });
 
 export type CreateUserDto = z.infer<typeof createUserZodSchema>

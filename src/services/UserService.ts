@@ -24,12 +24,26 @@ class UserService {
         this.userRepository = userRepository;
     }
 
+    // async getUser(id: number) {
+    //     try {
+    //         const user = await this.userRepository.get(id, 'userId');
+    //         return user;
+    //     } catch (error) {
+    //         console.log('get user in error', error);
+    //         if(error instanceof BaseError) throw error;
+    //         throw new InternalServerError('Can not get the user', error);
+    //     }
+    // }
+
     async getUser(id: number) {
+        console.log('getUser function called with ID:', id);
         try {
             const user = await this.userRepository.get(id, 'userId');
+            console.log('DB Query Executed');
             return user;
         } catch (error) {
-            if(error instanceof BaseError) throw error;
+            console.log('get user error', error);
+            if (error instanceof BaseError) throw error;
             throw new InternalServerError('Can not get the user', error);
         }
     }
@@ -59,6 +73,7 @@ class UserService {
             const jwt = auth.createToken({ id: user.id, email: user.email });
             return jwt;
         } catch (error) {
+            console.log('sign in error', error);
             if(error instanceof BaseError) throw error;
             throw new InternalServerError('Can not get the user', error);
         }

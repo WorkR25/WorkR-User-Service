@@ -40,7 +40,7 @@ async function updateEmployer(this: FastifyInstance, req: FastifyRequest, res: F
     try {
         const requestBody = req.body as UpdateEmployerDto;
         const requestParams = req.params as UpdateUserId;
-        const response = await this.userService.updateEmployerProfile(requestParams.id, requestBody);
+        const response = await this.userService.updateEmployerProfile(Number(requestParams.id), requestBody);
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
@@ -52,7 +52,7 @@ async function updateJobseeker(this: FastifyInstance, req: FastifyRequest, res: 
     try {
         const requestBody = req.body as UpdateJobseekerDto;
         const requestParams = req.params as UpdateUserId;
-        const response = await this.userService.updateJobseekerProfile(requestParams.id, requestBody);
+        const response = await this.userService.updateJobseekerProfile(Number(requestParams.id), requestBody);
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
@@ -64,7 +64,7 @@ async function updateUserAccount(this: FastifyInstance, req: FastifyRequest, res
     try {
         const requestBody = req.body as UpdateAccountDto;
         const requestParams = req.params as UpdateUserId;
-        const response = await this.userService.updateAccountDetails(requestParams.id, requestBody);
+        const response = await this.userService.updateAccountDetails(Number(requestParams.id), requestBody);
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
@@ -85,8 +85,9 @@ async function makeAdminRole(this: FastifyInstance, req: FastifyRequest, res: Fa
 
 async function getUser(this: FastifyInstance, req: FastifyRequest, res: FastifyReply) {
     try {
+        console.log('calling');
         const requestParams = req.params as UpdateUserId;
-        const response = await this.userService.getUser(requestParams.id);
+        const response = await this.userService.getUser(Number(requestParams.id));
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
@@ -116,7 +117,7 @@ async function uploadResume(this: FastifyInstance, req: FastifyRequest, res: Fas
     try {
         const data = await req.file();
         const requestParams = req.params as UpdateUserId;
-        const response = await this.userService.uploadResume(requestParams.id, data);
+        const response = await this.userService.uploadResume(Number(requestParams.id), data);
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
@@ -128,7 +129,7 @@ async function uploadProfileImage(this: FastifyInstance, req: FastifyRequest, re
     try {
         const data = await req.file();
         const requestParams = req.params as UpdateUserId;
-        const response = await this.userService.uploadProfileImage(requestParams.id, data);
+        const response = await this.userService.uploadProfileImage(Number(requestParams.id), data);
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
