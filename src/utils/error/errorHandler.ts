@@ -10,6 +10,7 @@ function isRateLimitError(err: Error) {
 }
 
 function errorHandler(err: Error, _req: FastifyRequest, res: FastifyReply) {
+    console.log(err);
     if(err instanceof BaseError) {
         ErrorResponse.message = err.message;
         ErrorResponse.error = err.details;
