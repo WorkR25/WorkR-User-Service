@@ -92,6 +92,7 @@ class UserService {
 
             return user.id;
         } catch (error) {
+            console.log('is auth', error);
             if(error instanceof BaseError) throw error;
 
             if(error instanceof TokenExpiredError) {
@@ -102,7 +103,7 @@ class UserService {
                 throw new UnauthorizedError('Invalid JWT token', { token });
             }
 
-            throw new InternalServerError('Something went wrong', {});
+            throw new InternalServerError('Something went wrong', {error: 'is auth'});
         }
     }
 
