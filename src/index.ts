@@ -1,7 +1,7 @@
 import fastifyCookie from '@fastify/cookie';
-// import rateLimit from '@fastify/rate-limit';
 import cors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
+import rateLimit from '@fastify/rate-limit';
 import Fastify from 'fastify';
 
 import app from './app';
@@ -16,10 +16,10 @@ const fastify = Fastify({
     maxRequestsPerSocket: 1000
 });
 
-// fastify.register(rateLimit, {
-//     max: 3,
-//     timeWindow: '2 minutes',
-// });
+fastify.register(rateLimit, {
+    max: 10,
+    timeWindow: '2 minutes',
+});
 
 fastify.register(cors, {
     origin: ['https://www.workr.club', 'http://localhost:3000'],
