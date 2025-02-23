@@ -20,6 +20,13 @@ const fastify = Fastify({
 fastify.register(rateLimit, {
     max: 10,
     timeWindow: '2 minutes',
+    errorResponseBuilder: (_req, cont) => {
+        return {
+            success: false,
+            message: 'Rate limit exceeded. Please try again later.',
+            data: cont,
+        };
+    }
 });
 
 fastify.register(cors, {
