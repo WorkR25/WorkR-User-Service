@@ -1,7 +1,7 @@
 import fastifyCookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
-import rateLimit from '@fastify/rate-limit';
+// import rateLimit from '@fastify/rate-limit';
 import Fastify from 'fastify';
 
 import app from './app';
@@ -17,17 +17,17 @@ const fastify = Fastify({
     logger: true
 });
 
-fastify.register(rateLimit, {
-    max: 10,
-    timeWindow: '2 minutes',
-    errorResponseBuilder: (_req, cont) => {
-        return {
-            success: false,
-            message: 'Rate limit exceeded. Please try again later.',
-            data: cont,
-        };
-    }
-});
+// fastify.register(rateLimit, {
+//     max: 10,
+//     timeWindow: '2 minutes',
+//     errorResponseBuilder: (_req, cont) => {
+//         return {
+//             success: false,
+//             message: 'Rate limit exceeded. Please try again later.',
+//             data: cont,
+//         };
+//     }
+// });
 
 fastify.register(cors, {
     origin: ['https://www.workr.club', 'http://localhost:3000'],

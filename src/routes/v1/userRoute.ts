@@ -31,7 +31,7 @@ async function userRoute(fastify: FastifyInstance) {
     }, userController.uploadCompanyLogo);
 
     fastify.get('/:id', {
-        preValidation: validateToken
+        // preValidation: validateToken
     }, userController.getUser);
 
     fastify.put('/:id/employer', {
