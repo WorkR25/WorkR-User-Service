@@ -40,6 +40,7 @@ fastify.setErrorHandler(errorHandler);
 
 fastify.listen({ port: PORT, host: '0.0.0.0' }, async (err) => {
     if(err) {
+        console.log(err);
         fastify.log.error(err);
         process.exit(1);
     }
