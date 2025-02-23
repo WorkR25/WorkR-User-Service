@@ -10,7 +10,8 @@ export async function validateToken(this: FastifyInstance, req: FastifyRequest, 
             req.user = response;
         }
     } catch (error) {
+        console.log('validateTokenError', error);
         const err = error as BaseError;
-        return res.status(err.statusCode).send(error);
+        return res.status(err.statusCode).send({ error: 'having' });
     }
 }
