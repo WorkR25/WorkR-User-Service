@@ -20,6 +20,11 @@ const dataSource = new DataSource({
     logging: true,
     ssl: {
         rejectUnauthorized: false
+    },
+    extra: {
+        max: 10,
+        idleTimeoutMillis: 15000,
+        connectionTimeoutMillis: 2000,
     }
 });
 
