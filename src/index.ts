@@ -38,6 +38,10 @@ fastify.register(fastifyMultipart, {
 
 fastify.register(app);
 
+fastify.get('/', async (_req, res) => {
+    return res.send({ msg: 'healthy '});
+});
+
 fastify.setErrorHandler(errorHandler);
 
 fastify.listen({ port: PORT, host: '0.0.0.0' }, async (err) => {
