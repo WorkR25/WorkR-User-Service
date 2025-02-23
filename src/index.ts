@@ -20,7 +20,7 @@ const fastify = Fastify();
 // });
 
 fastify.register(cors, {
-    origin: ['http://localhost:3000'],
+    origin: ['https://www.workr.club'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true
 });
