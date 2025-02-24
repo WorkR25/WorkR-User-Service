@@ -6,6 +6,8 @@ import { validator } from '../../validators/validateRequest';
 import { validateToken } from '../../validators/validateToken';
 
 async function userRoute(fastify: FastifyInstance) {
+    console.log('running userRoute');
+    
     fastify.post('/signup', {
         preValidation: validator({ body: createUserZodSchema })
     }, userController.signup);
