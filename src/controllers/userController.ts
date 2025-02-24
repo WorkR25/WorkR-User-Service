@@ -90,7 +90,6 @@ async function getUser(this: FastifyInstance, req: FastifyRequest, res: FastifyR
         SuccessResponse.data = response;
         return res.status(StatusCodes.OK).send(SuccessResponse);
     } catch (error) {
-        console.log('controller error', error);
         throw error;
     }
 }

@@ -59,7 +59,6 @@ class UserService {
             const jwt = auth.createToken({ id: user.id, email: user.email });
             return jwt;
         } catch (error) {
-            console.log('sign in error', error);
             if(error instanceof BaseError) throw error;
             throw new InternalServerError('Can not get the user', error);
         }
@@ -68,7 +67,6 @@ class UserService {
     async isAuthenticated(token: string) {
         try {
             if(!token) {
-                console.log('checking token');
                 throw new BadRequestError('Missing JWT token', { token: undefined });
             }
             const response = auth.verifyToken(token);
@@ -79,7 +77,6 @@ class UserService {
 
             return user.id;
         } catch (error) {
-            console.log('is auth', error);
             if(error instanceof BaseError) throw error;
 
             if(error instanceof TokenExpiredError) {
@@ -115,7 +112,6 @@ class UserService {
             }
             return jobseeker;
         } catch (error) {
-            console.log(error);
             if(error instanceof BaseError) throw error;
             throw new InternalServerError('Something went wrong', {});
         }

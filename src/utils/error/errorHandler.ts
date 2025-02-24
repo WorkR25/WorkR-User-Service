@@ -10,11 +10,11 @@ function isRateLimitError(err: Error) {
 }
 
 function errorHandler(err: Error, _req: FastifyRequest, res: FastifyReply) {
-    console.log(err);
+
     if(err instanceof BaseError) {
         ErrorResponse.message = err.message;
         ErrorResponse.error = err.details;
-        return res.status(502).send({ error: 'handler base' });
+        return res.status(502).send(ErrorResponse);
     }
 
     if(isRateLimitError(err)) {
@@ -24,7 +24,7 @@ function errorHandler(err: Error, _req: FastifyRequest, res: FastifyReply) {
     }
     
     ErrorResponse.error = err;
-    return res.status(StatusCodes.BAD_GATEWAY).send({ err: 'bad' });
+    return res.status(StatusCodes.BAD_GATEWAY).send(ErrorResponse);
 }
 
 export default errorHandler;
