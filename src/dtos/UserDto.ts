@@ -22,6 +22,8 @@ export const getUserZodSchema = z.object({
 });
 
 export const updateEmployerZodSchema = z.object({
+    id: z.number(),
+    userStatus: z.nativeEnum(USER_STATUS),
     linkedInProfile: z.string(),
     numberOfEmployees: z.string(),
     companyType: z.string(),
@@ -29,15 +31,17 @@ export const updateEmployerZodSchema = z.object({
     headquarterLocation: z.string(),
     twitterProfile: z.string().optional(),
     profileImage: z.string().optional(),
+    industryType: z.string().optional(),
     companyWebsite: z.string(),
 });
 
 export const updateJobseekerZodSchema = z.object({
+    id: z.number(),
     jobseekerType: z.nativeEnum(JOBSEEKER_TYPE),
     userStatus: z.nativeEnum(USER_STATUS),
     interestedDomain: z.array(z.string()).optional(),
-    instituteName: z.string(),
-    yearOfGraduation: z.number(),
+    instituteName: z.string().optional(),
+    yearOfGraduation: z.number().optional(),
     githubProfile: z.string().optional(),
     linkedInProfile: z.string().optional(),
     profileImage: z.string().optional(),
