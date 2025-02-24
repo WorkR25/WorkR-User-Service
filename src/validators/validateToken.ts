@@ -11,7 +11,10 @@ export async function validateToken(this: FastifyInstance, req: FastifyRequest, 
             req.user = response;
         }
     } catch (error) {
+        console.log('printing from validate token', error);
         const err = error as BaseError;
         return res.status(502).send({ error: err });
     }
 }
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhcmlqZWV0Z2FuZ3VsaTMyQGdtYWlsLmNvbSIsImlhdCI6MTc0MDMyNDU5OCwiZXhwIjoxNzQwNDEwOTk4fQ.ALKXlIFuWw03kIoRjoPLHY4LChGOFL4c68UfwouKDr0
