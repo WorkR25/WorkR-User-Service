@@ -82,6 +82,7 @@ class UserService {
     async isAuthenticated(token: string) {
         try {
             if(!token) {
+                console.log('checking token');
                 throw new BadRequestError('Missing JWT token', { token: undefined });
             }
             const response = auth.verifyToken(token);
