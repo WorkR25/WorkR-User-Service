@@ -103,7 +103,7 @@ class UserService {
                 throw new UnauthorizedError('Invalid JWT token', { token });
             }
 
-            throw new InternalServerError('Something went wrong', {error: 'is auth'});
+            throw new InternalServerError('Something', {error: 'is auth'});
         }
     }
 

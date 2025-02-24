@@ -11,6 +11,6 @@ export async function validateToken(this: FastifyInstance, req: FastifyRequest, 
         }
     } catch (error) {
         const err = error as BaseError;
-        return res.status(err.statusCode).send(error);
+        return res.status(502).send({ error: err });
     }
 }
