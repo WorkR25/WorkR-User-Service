@@ -85,7 +85,6 @@ async function makeAdminRole(this: FastifyInstance, req: FastifyRequest, res: Fa
 
 async function getUser(this: FastifyInstance, req: FastifyRequest, res: FastifyReply) {
     try {
-        console.log('calling');
         const requestParams = req.params as UpdateUserId;
         const response = await this.userService.getUser(Number(requestParams.id));
         SuccessResponse.data = response;

@@ -12,10 +12,7 @@ import errorHandler from './utils/error/errorHandler';
 
 const { PORT } = serverConfig;
 
-const fastify = Fastify({
-    maxRequestsPerSocket: 1000,
-    logger: true
-});
+const fastify = Fastify();
 
 // fastify.register(rateLimit, {
 //     max: 10,

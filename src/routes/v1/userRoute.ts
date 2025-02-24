@@ -1,13 +1,11 @@
 import { FastifyInstance } from 'fastify';
 
 import userController from '../../controllers/userController';
-import { createUserZodSchema, getUserZodSchema } from '../../dtos/UserDto';
+import { createAdminRoleZodSchema, createUserZodSchema, getApplicantDetailsZodSchema, getUserZodSchema, updateAccountDetailsZodSchema, updateEmployerZodSchema, updateJobseekerZodSchema, updateUserIdZodSchema } from '../../dtos/UserDto';
 import { validator } from '../../validators/validateRequest';
 import { validateToken } from '../../validators/validateToken';
 
 async function userRoute(fastify: FastifyInstance) {
-    console.log('running userRoute');
-    
     fastify.post('/signup', {
         preValidation: validator({ body: createUserZodSchema })
     }, userController.signup);
@@ -17,15 +15,18 @@ async function userRoute(fastify: FastifyInstance) {
     }, userController.signin);
 
     fastify.post('/applicants', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ body: getApplicantDetailsZodSchema })
     }, userController.getAllApplicantDetails);
 
     fastify.post('/:id/upload-resume', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ params: updateUserIdZodSchema })
     }, userController.uploadResume);
 
     fastify.post('/:id/upload-profile-image', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ params: updateUserIdZodSchema })
     }, userController.uploadProfileImage);
 
     fastify.post('/upload-company-logo', {
@@ -33,23 +34,28 @@ async function userRoute(fastify: FastifyInstance) {
     }, userController.uploadCompanyLogo);
 
     fastify.get('/:id', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ params: updateUserIdZodSchema })
     }, userController.getUser);
 
     fastify.put('/:id/employer', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ body: updateEmployerZodSchema, params: updateUserIdZodSchema })
     }, userController.updateEmployer);
 
     fastify.put('/:id/jobseeker', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ body: updateJobseekerZodSchema, params: updateUserIdZodSchema})
     }, userController.updateJobseeker);
 
     fastify.patch('/:id/account', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ body: updateAccountDetailsZodSchema, params: updateUserIdZodSchema })
     }, userController.updateUserAccount);
 
     fastify.patch('/adminrole', {
-        preValidation: validateToken
+        preValidation: validateToken,
+        preHandler: validator({ body: createAdminRoleZodSchema })
     }, userController.makeAdminRole);
 
 }

@@ -24,26 +24,12 @@ class UserService {
         this.userRepository = userRepository;
     }
 
-    // async getUser(id: number) {
-    //     try {
-    //         const user = await this.userRepository.get(id, 'userId');
-    //         return user;
-    //     } catch (error) {
-    //         console.log('get user in error', error);
-    //         if(error instanceof BaseError) throw error;
-    //         throw new InternalServerError('Can not get the user', error);
-    //     }
-    // }
-
     async getUser(id: number) {
-        console.log('getUser function called with ID:', id);
         try {
             const user = await this.userRepository.get(id, 'userId');
-            console.log('DB Query Executed');
             return user;
         } catch (error) {
-            console.log('get user error', error);
-            if (error instanceof BaseError) throw error;
+            if(error instanceof BaseError) throw error;
             throw new InternalServerError('Can not get the user', error);
         }
     }
@@ -104,7 +90,7 @@ class UserService {
                 throw new UnauthorizedError('Invalid JWT token', { token });
             }
 
-            throw new InternalServerError('Something', {error: 'is auth'});
+            throw new InternalServerError('Something went wrong', { error });
         }
     }
 
